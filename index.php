@@ -47,6 +47,9 @@
 <form id="deconnexion-form" action="deconnexion.php" method="post" style="display:none">
     <button type="submit">Se déconnecter</button>
 </form>
+<form id="ingredient_cocktail-form" action="list_ingredient.php" method="post" style="display: none">
+
+</form>
 
 </body>
 </html>

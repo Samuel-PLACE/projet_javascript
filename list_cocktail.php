@@ -19,7 +19,7 @@ if($result != null)
 else
 {
     $retour->success = false;
-    $retour->message = "Liste vide : veuillez en ajouter avant de demander la liste 2";
+    $retour->message = "Liste vide : veuillez en ajouter avant de demander la liste";
 }
 
 header('Cache-Control: no-cache, must-revalidate');

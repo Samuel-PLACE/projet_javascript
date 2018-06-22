@@ -1,21 +1,6 @@
 $(document).ready(function() {
     'use strict';
 
-    $('#ingredient_cocktail-form').submit(function () {
-        alert("coucou");
-        $.ajax({
-            'url': $(this).attr('action'),
-            'method': 'list_ingredient.php',
-            'data': $(this).serialize()
-        }).done(function (data) {
-            alert(data.message);
-
-        }).fail(function () {
-            $('body').html('Une erreur est survenue...');
-        });
-        return false;
-    });
-
     $('#connexion-form').submit(function () {
         $.ajax({
             'url': $(this).attr('action'),
@@ -64,7 +49,7 @@ $(document).ready(function() {
     });
 
     $('#liste_cocktail-form').submit(function() {
-        let body;
+        let message;
         $.ajax({
             'url': $(this).attr('action'),
             'method': $(this).attr('method'),
@@ -72,25 +57,38 @@ $(document).ready(function() {
         }).done(function (data) {
             if (data.success === true)
             {
+                message = data.message;
                 alert(data.message);
-                let e = $('<form>');
+                let e = $('#ingredient_cocktail-form');
                 for(let row in data.message)
                 {
-                    let f = $('<input>');
-                    e.append(f);
+                    let f = $('<input>').css("margin", "5px").css("padding", "5px", "2px");
+                    e.append(f).append('<br/>');
                     f.attr('name', 'ingredient_cocktail-button')
                         .attr('type', 'submit')
                         .attr('value', data.message[row]);
                 }
                 $('body').append('<br/>').append(e);
-                e.attr('id', 'ingredient_cocktail-form')
-                    .attr('action', 'list_ingredient.php')
-                    .attr('method', 'post');
+                e.show();
+                $('#liste_cocktail-form').hide();
             }
             else
             {
                 alert(data.message);
             }
+        }).fail(function () {
+            $('body').html('Une erreur est survenue...');
+        });
+        return false;
+    });
+
+    $('#ingredient_cocktail-form').submit(function () {
+        $.ajax({
+            'url': $(this).attr('action'),
+            'method': $(this).attr('method'),
+            'data': $(this).serialize()
+        }).done(function (data) {
+            alert(data.message);
         }).fail(function () {
             $('body').html('Une erreur est survenue...');
         });

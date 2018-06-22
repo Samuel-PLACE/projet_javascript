@@ -10,12 +10,12 @@ $result = $mp->get_ingredient($_POST['ingredient_cocktail-button']);
 if($result != null)
 {
     $retour->success = true;
-    $retour->message = $result;
+    $retour->message = 'success' . $result;
 }
 else
 {
     $retour->success = false;
-    $retour->message = "fail";
+    $retour->message = "fail" . $result;
 }
 
 header('Cache-Control: no-cache, must-revalidate');
