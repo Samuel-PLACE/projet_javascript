@@ -9,10 +9,9 @@
     <script src="js/script.js"></script>
 </head>
 <body>
-
+<!-- Lorsqu'une personne n'est pas connecté -->
 <button id="inscription-button" style="display:none">S'inscrire</button>
 <button id="connexion-button" style="display:none">Se connecter</button>
-<br/>
 <form id="inscription-form" action="inscription.php" method="post" style="display:none">
     <label for="nom_inscription">Nom</label>
     <input id="nom_inscription" name="nom" type="text"/>
@@ -31,8 +30,6 @@
     <br/>
     <button id="inscription_submit" type="submit">Envoyer</button>
 </form>
-
-
 <form id="connexion-form" action="connexion.php" method="post" style="display:none">
     <label for="email_connexion">E-mail</label>
     <input id="email_connexion" name="email" type="email"/>
@@ -41,6 +38,11 @@
     <input id="password_connexion" name="password" type="password"/>
     <br/>
     <button id="connexion_submit" type="submit">Envoyer</button>
+</form>
+
+<!-- Lorsqu'une personne est connecté -->
+<form id="liste_cocktail-form" action="list_cocktail.php" method="post" style="display: none">
+    <button type="submit">Afficher la liste des cocktails</button>
 </form>
 <form id="deconnexion-form" action="deconnexion.php" method="post" style="display:none">
     <button type="submit">Se déconnecter</button>
