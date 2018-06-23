@@ -6,16 +6,20 @@ $mp = new model_pdo();
 $retour = new stdClass();
 $list = "";
 
-$result = $mp->get_ingredient($_POST['ingredient_cocktail-button']);
+$result = $mp->get_ingredient($_GET['ingredient_cocktail']);
 if($result != null)
 {
+    foreach ($result as $row)
+    {
+        $list .= $row[2] . " " . $row[1] . " de " . $row[0] . ", ";
+    }
     $retour->success = true;
-    $retour->message = 'success' . $result;
+    $retour->message = $list;
 }
 else
 {
     $retour->success = false;
-    $retour->message = "fail" . $result;
+    $retour->message = "Erreur de traitement" ;
 }
 
 header('Cache-Control: no-cache, must-revalidate');

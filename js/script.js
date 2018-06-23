@@ -60,13 +60,25 @@ $(document).ready(function() {
                 message = data.message;
                 alert(data.message);
                 let e = $('#ingredient_cocktail-form');
-                for(let row in data.message)
-                {
-                    let f = $('<input>').css("margin", "5px").css("padding", "5px", "2px");
-                    e.append(f).append('<br/>');
-                    f.attr('name', 'ingredient_cocktail-button')
+                for(let row in data.message) {
+                    let f = $('<input>').css("margin", "5px").css("padding", "5px", "2px")
+                        .attr('name', 'ingredient_cocktail-button')
                         .attr('type', 'submit')
-                        .attr('value', data.message[row]);
+                        .attr('value', data.message[row])
+                        .click(function() {
+                            $.ajax({
+                                'url': $(e).attr('action'),
+                                'method': 'GET',
+                                'data': 'ingredient_cocktail=' + data.message[row]
+                            }).done(function (data) {
+                                alert(data.message);
+                            }).fail(function () {
+                                $('body').html('Une erreur est survenue...');
+                            });
+                            return false;
+                        });
+                    e.append(f).append('<br/>');
+
                 }
                 $('body').append('<br/>').append(e);
                 e.show();
@@ -82,7 +94,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $('#ingredient_cocktail-form').submit(function () {
+    /*$('#ingredient_cocktail-form').submit(function () {
         $.ajax({
             'url': $(this).attr('action'),
             'method': $(this).attr('method'),
@@ -93,7 +105,7 @@ $(document).ready(function() {
             $('body').html('Une erreur est survenue...');
         });
         return false;
-    });
+    });*/
 
     $.ajax({
         'url': 'isConnect.php',

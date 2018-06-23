@@ -46,7 +46,7 @@ class model_pdo
 
     public function get_ingredient($nomcocktail)
     {
-        $prepare = $this->pdo->prepare('SELECT ingredient.nom, unite.nom FROM melange, cocktail, unite, ingredient WHERE cocktail.nom = :nom 
+        $prepare = $this->pdo->prepare('SELECT ingredient.nom, unite.nom, quantité FROM melange, cocktail, unite, ingredient WHERE cocktail.nom = :nom 
                                                                                                                     AND cocktail = cocktail.id 
                                                                                                                     AND unite = unite.id
                                                                                                                     AND ingredient = ingredient.id');
