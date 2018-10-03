@@ -56,4 +56,90 @@ class model_pdo
             return null;
         return $prepare->fetchAll();
     }
+
+    public function set_ingredient($nomingedient)
+    {
+        $prepare = $this->pdo->prepare('INSERT INTO ingredient (nom) VALUES (:nom)');
+        $prepare->bindParam(':nom', $nomingedient);
+        return $prepare->execute();
+    }
+
+    public function set_unite($nomunite)
+    {
+        $prepare = $this->pdo->prepare('INSERT INTO unite (nom) VALUES (:nom)');
+        $prepare->bindParam(':nom', $nomunite);
+        return $prepare->execute();
+    }
+
+    public function get_all_ingredient ()
+    {
+        $prepare = $this->pdo->prepare('SELECT nom FROM ingredient');
+        $execute = $prepare->execute();
+        if ($execute == FALSE)
+            return null;
+        return $prepare->fetchAll();
+    }
+
+    public function get_all_unite()
+    {
+        $prepare = $this->pdo->prepare('SELECT nom FROM unite');
+        $execute = $prepare->execute();
+        if ($execute == FALSE)
+            return null;
+        return $prepare->fetchAll();
+    }
+
+    public function set_cocktail($nomcocktail)
+    {
+        $prepare = $this->pdo->prepare('INSERT INTO cocktail (nom) VALUES (:nom)');
+        $prepare->bindParam(':nom', $nomcocktail);
+        return $prepare->execute();
+    }
+
+    public function get_cocktail_id($nomcocktail)
+    {
+        $prepare = $this->pdo->prepare('SELECT id FROM cocktail WHERE nom = :nom');
+        $prepare->bindParam(':nom', $nomcocktail);
+        $execute = $prepare->execute();
+        if ($execute == FALSE)
+            return null;
+        return $prepare->fetchAll();
+    }
+
+    public function get_ingredient_id($nomingredient)
+    {
+        $prepare = $this->pdo->prepare('SELECT id FROM ingredient WHERE nom = :nom');
+        $prepare->bindParam(':nom', $nomingredient);
+        $execute = $prepare->execute();
+        if ($execute == FALSE)
+            return null;
+        return $prepare->fetchAll();
+    }
+
+    public function get_unite_id($nomunite)
+    {
+        $prepare = $this->pdo->prepare('SELECT id FROM unite WHERE nom = :nom');
+        $prepare->bindParam(':nom', $nomunite);
+        $execute = $prepare->execute();
+        if ($execute == FALSE)
+            return null;
+        return $prepare->fetchAll();
+    }
+
+    public function set_melange($idcocktail, $idingredient, $idunite, $quantite)
+    {
+        $prepare = $this->pdo->prepare('INSERT INTO melange(cocktail, ingredient, unite, quantité) VALUES (:cocktail, :ingredient, :unite, :quantite)');
+        $prepare->bindParam(':cocktail', $idcocktail);
+        $prepare->bindParam(':ingredient', $idingredient);
+        $prepare->bindParam(':unite', $idunite);
+        $prepare->bindParam(':quantite', $quantite);
+        return $prepare->execute();
+    }
+
+    public function delete_cocktail($nomcocktail)
+    {
+        $prepare = $this->pdo->prepare('DELETE FROM cocktail WHERE nom = :nom');
+        $prepare->bindParam(':nom', $nomcocktail);
+        return $prepare->execute();
+    }
 }

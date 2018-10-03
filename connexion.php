@@ -11,10 +11,10 @@ if ($result != null)
     foreach ($result as $row)
     {
         $val = 6;
-        if(isset($_POST['password']) && $_POST['password']==$row['mdp'])
+        if(!empty($_POST['password']) && $_POST['password']==$row['mdp'])
         {
             $retour->success = true;
-            $retour->message = "Bienvenue," . $row['prenom'] . $row['nom'];
+            $retour->message = "Bienvenue, " . $row['prenom'] . " " . $row['nom'];
             $_SESSION['user_id'] = $row['id'];
         }
     }
@@ -22,7 +22,6 @@ if ($result != null)
     {
         $retour->success = false;
         $retour->message = "Veuillez rentrer un mot de passe valide";
-        $_SESSION['user_id'] = 1;
     }
 }
 else
